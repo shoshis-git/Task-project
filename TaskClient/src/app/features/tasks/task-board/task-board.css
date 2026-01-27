@@ -1,0 +1,43 @@
+.board-container {
+  padding: 20px;
+  .add-task-bar {
+    margin-bottom: 20px;
+    input { padding: 10px; width: 300px; border-radius: 4px; border: 1px solid #ccc; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+  }
+}
+
+.board {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+
+  .column {
+    background: #ebedf0;
+    border-radius: 8px;
+    width: 350px;
+    min-height: 500px;
+    padding: 15px;
+
+    h3 { margin-top: 0; color: #444; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+  }
+}
+
+.task-card {
+  background: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  
+  h4 { margin: 0 0 10px 0; font-size: 1rem; }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    button { font-size: 0.75rem; cursor: pointer; }
+    .del { color: red; border: none; background: none; }
+  }
+
+  &.in-progress { border-left: 5px solid #ffc107; }
+  &.done { border-left: 5px solid #28a745; opacity: 0.8; h4 { text-decoration: line-through; } }
+}

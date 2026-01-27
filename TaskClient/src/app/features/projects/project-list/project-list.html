@@ -1,0 +1,27 @@
+<div class="projects-container">
+  <div class="header">
+    <button routerLink="/teams" class="back-btn">← חזרה לצוותים</button>
+    <h1>פרויקטים בצוות #{{ teamId() }}</h1>
+  </div>
+
+  <div class="create-card">
+    <h3>פרויקט חדש</h3>
+    <input [(ngModel)]="newProject.name" placeholder="שם הפרויקט" />
+    <textarea [(ngModel)]="newProject.description" placeholder="תיאור..."></textarea>
+    <button (click)="onCreateProject()">צור פרויקט</button>
+  </div>
+
+  <div class="projects-list">
+    @for (project of filteredProjects(); track project.id) {
+      <div class="project-item" [routerLink]="['/tasks', project.id]">
+        <div class="info">
+          <h4>{{ project.name }}</h4>
+          <p>{{ project.description }}</p>
+        </div>
+        <span class="status-badge">לחץ לצפייה במשימות</span>
+      </div>
+    } @empty {
+      <p>אין פרויקטים בצוות זה עדיין.</p>
+    }
+  </div>
+</div>

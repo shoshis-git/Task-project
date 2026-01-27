@@ -1,0 +1,29 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <h2>הרשמה למערכת</h2>
+
+
+    <div class="form-group">
+      <label>שם משתמש</label>
+      <input type="text" formControlName="name" placeholder="שם משתמש">
+    </div>
+
+
+  <div class="form-group">
+      <label>מייל</label>
+      <input type="email" formControlName="email" placeholder="enter@email.com">
+      @if(registerForm.get('email')?.touched && registerForm.get('email')?.invalid) {
+            <span class="error">
+                מייל לא תקין
+            </span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>סיסמה</label>
+      <input type="password" formControlName="password" placeholder="******">
+    </div>
+    @if(errorMessage) {
+      <p class="server-error">{{ errorMessage }}</p>
+    }
+    <button type="submit" [disabled]="registerForm.invalid">הרשמה</button>
+</form>
