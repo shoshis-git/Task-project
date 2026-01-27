@@ -3,10 +3,11 @@ import { TeamService } from '../../../core/services/team/team';
 import { Teams } from '../../../shared/modales';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-team-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './team-list.html',
   styleUrl: './team-list.css',
 })

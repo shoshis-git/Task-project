@@ -1,13 +1,14 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TaskService } from '../../../core/services/task/task-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Tasks } from '../../../shared/modales';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CommentsComponent } from '../../comments/comments';
 
 @Component({
   selector: 'app-task-board',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,CommentsComponent],
   templateUrl: './task-board.html',
   styleUrl: './task-board.css',
 })
@@ -38,8 +39,8 @@ export class TaskBoard {
 
   addTask() {
     if (!this.newTaskTitle.trim()) return;
-    const taskData: Partial<Tasks> = {
-      project_id: this.projectId(),
+    const taskData = {
+      projectId: Number(this.projectId()),
       title: this.newTaskTitle,
       status: 'todo',
       priority: 'medium'
@@ -52,7 +53,7 @@ export class TaskBoard {
   }
 
   changeStatus(task: Tasks, newStatus: string) {
-  this.taskService.updateTask(task.id, { statues: newStatus }).subscribe({
+  this.taskService.updateTask(task.id, { status: newStatus }).subscribe({
     next: (updatedTask) => {
       this.tasks.update(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t));
     },

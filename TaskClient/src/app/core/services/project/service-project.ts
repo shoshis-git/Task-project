@@ -17,7 +17,7 @@ export class ServiceProject {
   }
 
   // יצירת פרויקט חדש (POST /api/projects)
-  createProject(projectData: { team_id: number; name: string; description: string }): Observable<Projects> {
+  createProject(projectData: { teamId: number; name: string; description: string }): Observable<Projects> {
     return this.http.post<Projects>(this.API_URL, projectData);
   }
 }

@@ -15,7 +15,9 @@ export class AuthService {
   // Signal לשמירת נתוני המשתמש הנוכחי במערכת
   currentUser = signal<User | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
 
   // התחברות: אימייל וסיסמה בלבד
   login(credentials: { email: string; password: string }): Observable<{token: string, user: User}> {

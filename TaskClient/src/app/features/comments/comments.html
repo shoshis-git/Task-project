@@ -1,0 +1,22 @@
+<div class="comments-section">
+  <h5>תגובות ({{ comments().length }})</h5>
+  
+  <div class="comments-list">
+    @for (comment of comments(); track comment.id) {
+      <div class="comment-item">
+        <strong>{{ comment.author_name }}:</strong>
+        <p>{{ comment.body }}</p>
+        <small>{{ comment.created_at | date:'short' }}</small>
+      </div>
+    }
+  </div>
+
+  <div class="add-comment">
+    <textarea 
+      [(ngModel)]="newCommentBody" 
+      placeholder="כתבי תגובה..."
+      rows="2">
+    </textarea>
+    <button (click) ="sendComment()" [disabled]="!newCommentBody().trim()">שלח</button>
+  </div>
+</div>

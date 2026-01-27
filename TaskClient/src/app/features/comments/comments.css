@@ -1,0 +1,7 @@
+/* בתוך comments.component.scss */
+.comments-list {
+  max-height: 150px;
+  overflow-y: auto;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}

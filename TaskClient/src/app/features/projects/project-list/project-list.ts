@@ -43,8 +43,9 @@ export class ProjectList {
     if (!this.newProject.name) return;
 
     const payload = {
-      team_id: this.teamId(),
-      ...this.newProject
+      teamId: Number(this.teamId()),
+      name:this.newProject.name,
+      description:this.newProject.description
     };
 
     this.projectService.createProject(payload).subscribe({

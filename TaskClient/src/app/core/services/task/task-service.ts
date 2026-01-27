@@ -18,12 +18,12 @@ export class TaskService {
   }
 
   // יצירת משימה חדשה
-  createTask(task: Partial<Tasks>): Observable<Tasks> {
+  createTask(task:{projectId: number; title: string}): Observable<Tasks> {
     return this.http.post<Tasks>(this.API_URL, task);
   }
 
   // עדכון משימה (סטטוס, תיאור וכו')
-  updateTask(id: number, updates: { statues?: string; priority?: string }): Observable<Tasks> {
+  updateTask(id: number, updates: { status?: string; priority?: string }): Observable<Tasks> {
     return this.http.patch<Tasks>(`${this.API_URL}/${id}`, updates);
   }
 
