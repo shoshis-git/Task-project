@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Injectable({
@@ -16,7 +17,17 @@ export class AuthService {
   currentUser = signal<User | null>(null);
 
   constructor(private http: HttpClient) {
-    
+    const token = localStorage.getItem('token');
+  if (token) {
+    const decoded: any = jwtDecode(token);
+    // הנתונים נמצאים בתוך ה-Payload של הטוקן
+    this.currentUser.set({
+      id: decoded.id,
+      name: decoded.name,
+      email: decoded.email,
+      role: decoded.role,
+    });
+  }
   }
 
 
