@@ -1,0 +1,14 @@
+
+
+<nav class="navbar">
+    <div class="nav-brand" routerLink="/teams">WolfTasks 🐺</div>
+
+    <ul class="nav-links">
+        <li><a routerLink="/teams" routerLinkActive="active">הצוותים שלי</a></li>
+    </ul>
+
+    <div class="nav-user">
+        <span>שלום, <strong>{{ authService.currentUser()?.name }}</strong></span>
+        <button class="logout-btn" (click)="onLogout()">התנתק</button>
+    </div>
+</nav>

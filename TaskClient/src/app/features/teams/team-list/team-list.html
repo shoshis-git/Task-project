@@ -13,6 +13,15 @@
         <h3>{{ team.name }}</h3>
         <p>חברים בצוות: {{ team.members_count }}</p>
         <span class="date">נוצר ב: {{ team.created_at | date:'dd/MM/yyyy' }}</span>
+        <div class="add-member-section">
+        <h4>הוספת חבר</h4>
+        <input type="number" [(ngModel)]="memberForm.userId" placeholder="User ID" />
+        <select [(ngModel)]="memberForm.role">
+          <option value="member">Member</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button (click)="onAddMember(team.id)">הוסף</button>
+      </div>
        <button class="view-btn" [routerLink]="['/teams', team.id, 'projects']">
      צפה בפרויקטים
       </button>

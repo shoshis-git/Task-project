@@ -16,7 +16,7 @@ export class AuthService {
   currentUser = signal<User | null>(null);
 
   constructor(private http: HttpClient) {
-
+    
   }
 
   // התחברות: אימייל וסיסמה בלבד
@@ -47,5 +47,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.currentUser.set(null);
+   
   }
 }

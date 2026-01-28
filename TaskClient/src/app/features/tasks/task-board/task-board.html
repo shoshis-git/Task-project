@@ -13,6 +13,14 @@
           <div class="task-card">
             <h4>{{ task.title }}</h4>
             <p>{{ task.description }}</p>
+            <div class="priority-selector">
+              <small>עדיפות: </small>
+              <select [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
+                <option value="low">נמוכה</option>
+                <option value="medium">בינונית</option>
+                <option value="high">גבוהה</option>
+              </select>
+            </div>
             <app-comments [taskId]="task.id"></app-comments>
 
             <div class="actions">
@@ -31,6 +39,14 @@
           <div class="task-card in-progress">
             <h4>{{ task.title }}</h4>
             <p>{{ task.description }}</p>
+            <div class="priority-selector">
+              <small>עדיפות: </small>
+              <select [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
+                <option value="low">נמוכה</option>
+                <option value="medium">בינונית</option>
+                <option value="high">גבוהה</option>
+              </select>
+            </div>
             <app-comments [taskId]="task.id"></app-comments>
 
             <div class="actions">
