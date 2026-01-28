@@ -19,7 +19,7 @@ export class TaskBoard {
   projectId = signal<number>(0);
   tasks = signal<Tasks[]>([]);
 
-  // חלוקת המשימות לעמודות באמצעות Computed Signals
+
   todoTasks = computed(() => this.tasks().filter(t => t.status === 'todo'));
   inProgressTasks = computed(() => this.tasks().filter(t => t.status === 'in-progress'));
   doneTasks = computed(() => this.tasks().filter(t => t.status === 'done'));
@@ -61,7 +61,7 @@ export class TaskBoard {
   });
 }
 
-// פונקציית עדכון עדיפות (Priority)
+
 changePriority(task: Tasks, newPriority: string) {
   this.taskService.updateTask(task.id, { priority: newPriority }).subscribe(updatedTask => {
     this.tasks.update(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t));

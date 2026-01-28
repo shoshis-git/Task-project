@@ -27,7 +27,7 @@ export class Login implements OnInit {
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
           console.log('Login successful', res);
-          this.router.navigate(['/teams']); // מעבר למסך הצוותים לאחר הצלחה
+          this.router.navigate(['/teams']); 
         },
         error: (err) => {
           this.errorMessage = 'שגיאה בהתחברות. בדקי את המייל והסיסמה.';

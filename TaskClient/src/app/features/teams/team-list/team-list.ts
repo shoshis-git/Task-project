@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 export class TeamList {
   private teamService = inject(TeamService);
   
-  teams = signal<Teams[]>([]); // ניהול הרשימה בסיגנל
+  teams = signal<Teams[]>([]);
   newTeamName = '';
 memberForm = {
     userId: null as number | null,
@@ -50,8 +50,8 @@ memberForm = {
     this.teamService.addMember(teamId, this.memberForm.userId, this.memberForm.role).subscribe({
       next: () => {
         alert('החבר נוסף בהצלחה!');
-        this.memberForm.userId = null; // איפוס השדה
-        this.loadTeams(); // רענון הרשימה כדי לראות את ספירת החברים המעודכנת
+        this.memberForm.userId = null; 
+        this.loadTeams(); 
       },
       error: (err) => alert('שגיאה בהוספת חבר: ' + (err.error?.error || 'שגיאה כללית'))
     });

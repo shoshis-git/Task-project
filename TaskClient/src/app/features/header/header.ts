@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
-authService = inject(AuthService); // מכיל את ה-Signal של המשתמש
+authService = inject(AuthService); 
   private router = inject(Router);
 
   onLogout() {
-    this.authService.logout(); // הפונקציה שמוחקת טוקן ומשתמש מה-LocalStorage
+    this.authService.logout(); 
     this.router.navigate(['/login']);
   }
 }

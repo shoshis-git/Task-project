@@ -12,20 +12,20 @@ import { tap } from 'rxjs';
 export class AuthService {
   private readonly API_URL = `${environment.apiUrl}/auth`;
   
-  // Signal לשמירת נתוני המשתמש הנוכחי במערכת
+
   currentUser = signal<User | null>(null);
 
   constructor(private http: HttpClient) {
     
   }
 
-  // התחברות: אימייל וסיסמה בלבד
+
   login(credentials: { email: string; password: string }): Observable<{token: string, user: User}> {
     return this.http.post<{token: string, user: User}>(`${this.API_URL}/login`, credentials)
       .pipe(tap(res => this.handleAuthentication(res)));
   }
 
-  // הרשמה: שם, אימייל וסיסמה
+
   register(data: { name: string; email: string; password: string }): Observable<{token: string, user: User}> {
     return this.http.post<{token: string, user: User}>(`${this.API_URL}/register`, data)
       .pipe(tap(res => this.handleAuthentication(res)));

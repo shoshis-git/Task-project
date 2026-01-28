@@ -18,7 +18,7 @@ export class ProjectList {
   allProjects = signal<Projects[]>([]);
   teamId = signal<number>(0);
   
-  // סיגנל מחושב שמסנן את הפרויקטים לפי הצוות הנוכחי
+ 
   filteredProjects = computed(() => 
     this.allProjects().filter(p => p.team_id === this.teamId())
   );
@@ -26,7 +26,7 @@ export class ProjectList {
   newProject = { name: '', description: '' };
 
   ngOnInit() {
-    // שליפת ה-teamId מהכתובת (למשל /teams/5/projects)
+   
     this.route.params.subscribe(params => {
       this.teamId.set(+params['teamId']);
       this.loadProjects();

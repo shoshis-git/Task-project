@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class CommentsComponent {
 private commentService = inject(CommentService);
   
-  // שימוש ב-Signal Inputs של Angular 20
+
   taskId = input.required<number>();
   comments = signal<Comments[]>([]);
   newCommentBody = signal('');
@@ -36,7 +36,7 @@ private commentService = inject(CommentService);
       body: this.newCommentBody()
     }).subscribe(newComment => {
       this.comments.update(prev => [...prev, newComment]);
-      this.newCommentBody.set(''); // איפוס השדה
+      this.newCommentBody.set(''); 
     });
   }
 }

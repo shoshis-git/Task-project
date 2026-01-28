@@ -29,7 +29,7 @@ export class Register implements OnInit {
       this.authService.register(this.registerForm.value).subscribe({
         next: (res) => {
           console.log('Registration successful', res);
-          this.router.navigate(['/teams']); // מעבר למסך התחברות לאחר הצלחה
+          this.router.navigate(['/teams']); 
         },
         error: (err) => {
           this.errorMessage = 'שגיאה בהרשמה. נסה שוב.';
