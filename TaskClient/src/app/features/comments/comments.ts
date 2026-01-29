@@ -29,6 +29,7 @@ private commentService = inject(CommentService);
   }
 
   sendComment() {
+   
     if (!this.newCommentBody().trim()) return;
 
     this.commentService.addComment({

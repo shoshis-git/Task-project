@@ -20,6 +20,7 @@ export interface Projects{
     created_at: Date;
 }
 export interface Tasks{
+comments_count: any;
     id: number;
     project_id: number;
     title: string;

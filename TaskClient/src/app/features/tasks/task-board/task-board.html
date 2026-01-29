@@ -1,59 +1,111 @@
-<div class="board-container">
-  <div class="add-task-bar">
-    <input [(ngModel)]="newTaskTitle" placeholder="משימה חדשה לפרויקט..." />
-    <button (click)="addTask()">הוסף משימה</button>
-  </div>
+<div class="board-container" [class.list-view]="isListView">
+  <header class="board-header">
+    <h1 class="modern-title">לוח משימות פרויקט <span>#{{ projectId() }}</span></h1>
 
-  <div class="board">
-    
-    <div class="column">
-      <h3>לביצוע ({{ todoTasks().length }})</h3>
+    <div class="controls">
+      <div class="view-toggle">
+        <button (click)="isListView = false" [class.active]="!isListView">📊 לוח</button>
+        <button (click)="isListView = true" [class.active]="isListView">📝 רשימה</button>
+      </div>
+
+      <div class="quick-add">
+        <input [(ngModel)]="newTaskTitle" placeholder="משימה חדשה..." />
+        <button (click)="addTask()">הוסף +</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="board-layout">
+    <div class="column todo">
+      <div class="column-header">
+        <h3>לביצוע <span>{{ todoTasks().length }}</span></h3>
+      </div>
       <div class="task-list">
         @for (task of todoTasks(); track task.id) {
-          <div class="task-card">
+        <div class="task-card" [attr.data-priority]="task.priority">
+          <div class="card-body">
             <h4>{{ task.title }}</h4>
             <p>{{ task.description }}</p>
             <div class="priority-selector">
               <small>עדיפות: </small>
-              <select [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
+              <select class="modern-select" [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
                 <option value="low">נמוכה</option>
                 <option value="medium">בינונית</option>
                 <option value="high">גבוהה</option>
               </select>
             </div>
-            <app-comments [taskId]="task.id"></app-comments>
+          </div>
+          <div class="task-meta-info">
+            <button class="comments-trigger" (click)="openComments(task)">
+              💬 תגובות ({{ task.comments_count || 0 }})
+            </button>
+          </div>
 
-            <div class="actions">
-              <button (click)="changeStatus(task, 'in-progress')">→ התחל</button>
-              <button class="del" (click)="deleteTask(task.id)">מחק</button>
+          @if (activeTaskForComments) {
+          <div class="modal-overlay" (click)="closeComments()">
+            <div class="modal-content comments-modal" (click)="$event.stopPropagation()">
+              <div class="modal-header">
+                <h3>תגובות למשימה: <span>{{ activeTaskForComments.title }}</span></h3>
+                <button class="close-btn" (click)="closeComments()">×</button>
+              </div>
+              <div class="modal-body">
+                <app-comments [taskId]="activeTaskForComments.id"></app-comments>
+              </div>
             </div>
           </div>
+          }
+          <div class="card-footer status-btns">
+            <button class="prime" (click)="changeStatus(task, 'in-progress')">התחל ←</button>
+            <button class="btn-del" (click)="deleteTask(task.id)">🗑️</button>
+          </div>
+        </div>
         }
       </div>
     </div>
+
+
+
 
     <div class="column">
       <h3>בתהליך ({{ inProgressTasks().length }})</h3>
       <div class="task-list">
         @for (task of inProgressTasks(); track task.id) {
-          <div class="task-card in-progress">
-            <h4>{{ task.title }}</h4>
-            <p>{{ task.description }}</p>
-            <div class="priority-selector">
-              <small>עדיפות: </small>
-              <select [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
-                <option value="low">נמוכה</option>
-                <option value="medium">בינונית</option>
-                <option value="high">גבוהה</option>
-              </select>
-            </div>
-            <app-comments [taskId]="task.id"></app-comments>
+        <div class="task-card in-progress">
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.description }}</p>
+          <div class="priority-selector">
+            <small>עדיפות: </small>
+            <select class="modern-select" [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
+              <option value="low">נמוכה</option>
+              <option value="medium">בינונית</option>
+              <option value="high">גבוהה</option>
+            </select>
+          </div>
+          <div class="task-meta-info">
+            <button class="comments-trigger" (click)="openComments(task)">
+              💬 תגובות ({{ task.comments_count || 0 }})
+            </button>
+          </div>
 
-            <div class="actions">
-              <button (click)="changeStatus(task, 'done')">→ סיים</button>
-              <button (click)="changeStatus(task, 'todo')">← לביצוע</button>
+          @if (activeTaskForComments) {
+          <div class="modal-overlay" (click)="closeComments()">
+            <div class="modal-content comments-modal" (click)="$event.stopPropagation()">
+              <div class="modal-header">
+                <h3>תגובות למשימה: <span>{{ activeTaskForComments.title }}</span></h3>
+                <button class="close-btn" (click)="closeComments()">×</button>
+              </div>
+              <div class="modal-body">
+                <app-comments [taskId]="activeTaskForComments.id"></app-comments>
+              </div>
             </div>
           </div>
+          }
+
+          <div class="actions status-btns">
+            <button class="success" (click)="changeStatus(task, 'done')">→ סיים</button>
+            <button (click)="changeStatus(task, 'todo')">← לביצוע</button>
+          </div>
+        </div>
         }
       </div>
     </div>
@@ -62,19 +114,38 @@
       <h3>בוצע ({{ doneTasks().length }})</h3>
       <div class="task-list">
         @for (task of doneTasks(); track task.id) {
-          <div class="task-card done">
-            <h4>{{ task.title }}</h4>
-            <p>{{ task.description }}</p>
-            <app-comments [taskId]="task.id"></app-comments>
-
-            <div class="actions">
-              <button (click)="changeStatus(task, 'todo')">החזר לביצוע</button>
-              <button class="del" (click)="deleteTask(task.id)">מחק</button>
+        <div class="task-card done">
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.description }}</p>
+             <div class="task-meta-info">
+            <button class="comments-trigger" (click)="openComments(task)">
+              💬 תגובות ({{ task.comments_count || 0 }})
+            </button>
+                      @if (activeTaskForComments) {
+          <div class="modal-overlay" (click)="closeComments()">
+            <div class="modal-content comments-modal" (click)="$event.stopPropagation()">
+              <div class="modal-header">
+                <h3>תגובות למשימה: <span>{{ activeTaskForComments.title }}</span></h3>
+                <button class="close-btn" (click)="closeComments()">×</button>
+              </div>
+              <div class="modal-body">
+                <app-comments [taskId]="activeTaskForComments.id"></app-comments>
+              </div>
             </div>
           </div>
+          }
+          </div>
+          <div class="actions status-btns">
+            <button (click)="changeStatus(task, 'todo')">החזר לביצוע</button>
+            <button class="del" (click)="deleteTask(task.id)">מחק</button>
+          </div>
+        </div>
+        
         }
       </div>
     </div>
 
+
   </div>
+
 </div>

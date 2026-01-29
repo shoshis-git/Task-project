@@ -1,0 +1,258 @@
+/* --- מכולה ראשית --- */
+.projects-container {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    direction: rtl;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* --- כותרת וכפתור חזרה --- */
+.modern-title {
+    text-align: center;
+    font-family: 'Outfit', 'Segoe UI', sans-serif; /* פונט הייטקי */
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #1e1b4b, #4338ca);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 20px 0 40px;
+    flex: 1; /* דוחף את האלמנטים לצדדים כדי שיישאר במרכז */
+}
+
+.modern-title span {
+    color: #6366f1;
+    -webkit-text-fill-color: #6366f1;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.back-btn {
+    background: transparent;
+    color: #6366f1;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateX(5px); /* תזוזה קלה ימינה בחזרה */
+    color: #4f46e5;
+}
+
+/* --- כרטיס יצירת פרויקט חדש --- */
+.create-card {
+    background: linear-gradient(135deg, #f5f3ff, #f0f7ff);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #e0e7ff;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.05);
+}
+
+.create-card h3 {
+    margin-top: 0;
+    color: #4338ca;
+    margin-bottom: 15px;
+}
+
+.create-card input, 
+.create-card textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box; /* מבטיח שהפדינג לא יחרוג מהרוחב */
+}
+
+.create-card input:focus, 
+.create-card textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.create-card button {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.create-card button:hover {
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+}
+
+/* --- רשימת פרויקטים --- */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.project-item {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.project-item:hover {
+    border-color: #c7d2fe;
+    background-color: #f8faff;
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.project-item .info h4 {
+    margin: 0;
+    color: #1e1b4b;
+    font-size: 1.25rem;
+}
+
+.project-item .info p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* --- תגית סטטוס/קריאה לפעולה --- */
+.status-badge {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #dbeafe;
+}
+
+.project-item:hover .status-badge {
+    background: #6366f1;
+    color: white;
+}
+
+/* הודעה כשריק */
+.projects-list p {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px;
+    background: #f8fafc;
+    border-radius: 15px;
+    border: 2px dashed #e2e8f0;
+}
+/* --- כפתור פתיחת מודל --- */
+.add-project-btn {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+}
+
+.add-project-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+/* --- פופאפ (Modal) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6); /* רקע כהה שקוף */
+    backdrop-filter: blur(8px); /* אפקט טשטוש מודרני */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.05);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #4338ca;
+    font-size: 1.5rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #3c79ce;
+    cursor: pointer;
+}
+
+.modal-body input, .modal-body textarea {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #6366f1;
+    border-radius: 12px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    width: 100%;
+   background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+}

@@ -1,0 +1,57 @@
+<div class="home-container">
+    <section class="hero" appReveal>
+        <div class="hero-content">
+            <h1>הפכו את העבודה שלכם ל-<span>TaskFlow</span></h1>
+            <p>הדרך המהירה והחכמה ביותר לנהל צוותים, לעקוב אחר משימות ולזרום עם הפרויקטים שלכם עד להצלחה.</p>
+
+            <div class="cta-buttons">
+                @if (authService.currentUser()) {
+                <button routerLink="/teams" class="btn-primary">עבור לצוותים שלי</button>
+                } @else {
+                <button routerLink="/register" class="btn-primary">הצטרפו עכשיו - זה חינם</button>
+                <button routerLink="/login" class="btn-secondary">התחברות</button>
+                }
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="assets/logo.png" alt="Task Management Illustration">
+        </div>
+    </section>
+
+    <section class="features" appReveal>
+        <h2>כל מה שאתם צריכים כדי להצליח</h2>
+        <div class="features-grid">
+            <div class="feature-card" appReveal>
+                <div class="icon">👥</div>
+                <h3>ניהול צוותים</h3>
+                <p>צרו צוותים, הוסיפו חברים ונהלו הרשאות בקלות.</p>
+            </div>
+            <div class="feature-card" appReveal>
+                <div class="icon">📊</div>
+                <h3>לוחות קנבן</h3>
+                <p>גררו משימות בין סטטוסים וראו את התקדמות הפרויקט בזמן אמת.</p>
+            </div>
+            <div class="feature-card" appReveal>
+                <div class="icon">💬</div>
+                <h3>תגובות ושיתוף</h3>
+                <p>נהלו שיח על כל משימה ישירות בתוך המערכת.</p>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials" appReveal>
+  <h2>מה המשתמשים שלנו אומרים?</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <p>"מאז שעברנו ל-TaskFlow, הפרודוקטיביות של הצוות עלתה ב-40%. הכל פשוט זורם!"</p>
+      <strong>- דניאל, מנהל פרויקטים</strong>
+    </div>
+    <div class="testimonial-card">
+      <p>"הממשק הכי נקי שפגשתי. סוף סוף מערכת שלא דורשת שעות של לימוד."</p>
+      <strong>- שירה, מעצבת UX</strong>
+    </div>
+  </div>
+</section>
+
+ 
+
+</div>

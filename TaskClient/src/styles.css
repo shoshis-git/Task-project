@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+/* מוודא שהדפדפן מחשב גובה מלא */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* הופך את ה-root של אנגולר למכולה גמישה (Flex) */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* גובה מינימלי של 100% מגובה התצוגה */
+}
+
+/* התוכן הראשי (איפה שה-router-outlet) */
+main {
+  flex: 1; /* אומר לתוכן "תתפשט ותמלא את כל המקום שנשאר" */
+  display: flex;
+  flex-direction: column;
+}
+/* styles.css */
+.btn-primary {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  border: none;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  transform: translateY(-1px);
+}
+/* מצב התחלתי */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+/* מצב אחרי שהאלמנט נכנס למסך */
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}

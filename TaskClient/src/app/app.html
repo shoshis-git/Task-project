@@ -6,10 +6,15 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
- 
+
 @if(authService.currentUser() ){
 <app-header></app-header>
 }
+
+
 <main>
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </main>
+@if(authService.currentUser() ){
+<app-footer></app-footer>
+}

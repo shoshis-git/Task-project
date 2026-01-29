@@ -1,0 +1,133 @@
+/* מכולה מרכזית להצבת הטופס באמצע המסך (אופציונלי) */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    direction: rtl;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.1);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #f1f5f9;
+}
+
+h2 {
+    color: #1e1b4b;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #1e1b4b, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: 600;
+    color: #4b5563;
+    font-size: 0.9rem;
+    margin-right: 5px;
+}
+
+input {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    background-color: #f8fafc;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input:focus {
+    border-color: #6366f1;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* עיצוב שגיאות */
+.error {
+    color: #ef4444;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.server-error {
+    background-color: #fef2f2;
+    color: #dc2626;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid #fee2e2;
+}
+
+/* כפתור הרשמה */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* קישור להתחברות */
+p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #64748b; /* אפור-כחלחל עדין */
+}
+
+p a {
+    color: #6366f1; /* הכחול של המותג */
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease-in-out;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+p a:hover {
+    color: #a855f7; /* סגול במעבר עכבר */
+    background-color: #f5f3ff; /* רקע סגלגל בהיר מאוד */
+    text-decoration: underline;
+}

@@ -20,7 +20,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
   if (token) {
     const decoded: any = jwtDecode(token);
-    // הנתונים נמצאים בתוך ה-Payload של הטוקן
+    
     this.currentUser.set({
       id: decoded.id,
       name: decoded.name,

@@ -26,7 +26,7 @@ export class Login implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log('Login successful', res);
+         
           this.router.navigate(['/teams']); 
         },
         error: (err) => {

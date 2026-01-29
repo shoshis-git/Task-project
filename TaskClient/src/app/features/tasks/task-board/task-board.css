@@ -1,43 +1,267 @@
+/* --- הגדרות בסיס --- */
 .board-container {
-  padding: 20px;
-  .add-task-bar {
-    margin-bottom: 20px;
-    input { padding: 10px; width: 300px; border-radius: 4px; border: 1px solid #ccc; }
-    button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
-  }
+    padding: 30px;
+    direction: rtl;
+    background-color: #f8faff;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.board {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-
-  .column {
-    background: #ebedf0;
-    border-radius: 8px;
-    width: 350px;
-    min-height: 500px;
-    padding: 15px;
-
-    h3 { margin-top: 0; color: #444; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
-  }
+/* --- כותרת וכפתורי בקרה --- */
+.board-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
 }
 
-.task-card {
-  background: white;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  
-  h4 { margin: 0 0 10px 0; font-size: 1rem; }
-  .actions {
+.controls {
     display: flex;
     justify-content: space-between;
-    button { font-size: 0.75rem; cursor: pointer; }
-    .del { color: red; border: none; background: none; }
-  }
+    width: 100%;
+    max-width: 1200px;
+}
 
-  &.in-progress { border-left: 5px solid #ffc107; }
-  &.done { border-left: 5px solid #28a745; opacity: 0.8; h4 { text-decoration: line-through; } }
+.view-toggle {
+    background: #e2e8f0;
+    padding: 5px;
+    border-radius: 12px;
+    display: flex;
+    gap: 5px;
+}
+
+.view-toggle button {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.view-toggle button.active {
+    background: white;
+    color: #6366f1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.quick-add {
+    display: flex;
+    gap: 10px;
+}
+
+.quick-add input {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    width: 250px;
+}
+
+.quick-add button {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- מצב לוח (Kanban) --- */
+.board-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.column {
+    background: #f3f0ff;
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 600px;
+}
+
+.column-header h3 {
+    color: #1e1b4b;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.column-header span {
+    background: #cbd5e1;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* --- כרטיס משימה --- */
+.task-card {
+    background: white;
+    border-radius: 15px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    border-right: 6px solid #6366f1;
+    transition: transform 0.2s;
+}
+
+
+.task-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+}
+
+.task-card h4 { margin: 0 0 10px 0; color: #1e1b4b; }
+.task-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 15px; }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
+}
+
+.btn-start {
+    background: #f0f7ff;
+    color: #4f46e5;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* --- מצב רשימה (List View Logic) --- */
+.list-view .board-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.list-view .column {
+    min-height: auto;
+    background: transparent;
+    padding: 0;
+}
+
+.list-view .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list-view .task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 12px 25px;
+}
+
+.list-view .card-footer {
+    border: none;
+    padding: 0;
+}
+/* --- עיצוב כפתורי הסטטוס --- */
+.status-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.status-btns button {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.status-btns button:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.status-btns button.prime {
+    color: #6366f1;
+    border-color: #c7d2fe;
+    background: #f5f3ff;
+}
+
+.status-btns button.success {
+    color: #10b981;
+    border-color: #a7f3d0;
+    background: #ecfdf5;
+}
+/* --- עיצוב ה-Select החדשני --- */
+.modern-select {
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #475569;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.modern-select:focus {
+    border-color: #6366f1;
+    background-color: #ffffff;
+}
+.comments-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f5f3ff; /* סגול בהיר מאוד */
+    color: #6366f1; /* כחול-סגול מותגי */
+    border: 1px solid #e0e7ff;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 12px 0;
+}
+
+.comments-trigger:hover {
+    background: #6366f1;
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    transform: translateY(-2px);
+}
+
+.comments-trigger i {
+    font-size: 1rem;
+}
+.close-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f1f5f9; /* אפור בהיר */
+    color: #64748b; /* אפור כהה */
+    border: none;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+    background: #fee2e2; /* ורוד-אדום בהיר */
+    color: #ef4444; /* אדום */
+    transform: rotate(90deg); /* אפקט סיבוב קטן ומגניב */
 }

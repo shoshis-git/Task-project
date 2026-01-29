@@ -1,7 +1,123 @@
-/* בתוך comments.component.scss */
+/* --- מכולת התגובות הכללית --- */
+.comments-section {
+    background: #f3f0ff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 15px;
+    border: 1px solid #eef2ff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.comments-section h5 {
+    color: #1e1b4b;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f4ff;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- רשימת התגובות --- */
 .comments-list {
-  max-height: 150px;
-  overflow-y: auto;
-  border-top: 1px solid #eee;
-  padding-top: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+}
+
+/* עיצוב פס גלילה עדין */
+.comments-list::-webkit-scrollbar {
+    width: 5px;
+}
+.comments-list::-webkit-scrollbar-thumb {
+    background: #e0e7ff;
+    border-radius: 10px;
+}
+
+/* --- פריט תגובה בודד --- */
+.comment-item {
+    background: #f3f0ff;
+    padding: 12px 15px;
+    border-radius: 15px 15px 0 15px; /* עיצוב בועת צ'אט */
+    border: 1px solid #899ad4;
+    transition: all 0.2s;
+}
+
+.comment-item:hover {
+    background: #f1f5ff;
+}
+
+.comment-item strong {
+    display: block;
+    color: #6366f1; /* סגול-כחול מותגי */
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.comment-item p {
+    margin: 0;
+    color: #334155;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.comment-item small {
+    display: block;
+    text-align: left; /* תאריך בשמאל לעומת הטקסט בימין */
+    color: #94a3b8;
+    font-size: 0.75rem;
+    margin-top: 5px;
+}
+
+/* --- אזור הוספת תגובה --- */
+.add-comment {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-comment textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    background: #fcfdff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    resize: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.add-comment textarea:focus {
+    border-color: #a855f7; /* סגול חי במיקוד */
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+.add-comment button {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-comment button:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.add-comment button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }

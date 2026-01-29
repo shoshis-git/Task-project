@@ -1,72 +1,217 @@
+/* --- מכולה ראשית --- */
 .teams-container {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    direction: rtl;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  header {
+/* --- כותרת עליונה ואזור יצירת צוות --- */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    
-    .create-team-box {
-      display: flex;
-      gap: 10px;
-      input { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
-      button { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
-    }
-  }
-
-  .teams-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    margin-bottom: 50px;
+    flex-wrap: wrap;
     gap: 20px;
-  }
+}
 
-  .team-card {
+header h1 {
+    font-size: 2.5rem;
+    color: #1e1b4b; /* כחול כהה */
+    margin: 0;
+}
+
+.create-team-box {
+    display: flex;
+    gap: 10px;
     background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-top: 4px solid #007bff;
-    
-    h3 { margin-top: 0; color: #333; }
-    p { color: #666; }
-    .date { font-size: 0.8rem; color: #999; display: block; margin-bottom: 1rem; }
-    .view-btn { width: 100%; padding: 0.5rem; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; &:hover { background: #e0e0e0; } }
-  }
-  .add-member-section {
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px dashed #ccc;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.create-team-box input {
+    border: 1px solid #e2e8f0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    outline: none;
+    width: 250px;
+    transition: border-color 0.3s;
+}
+
+.create-team-box input:focus {
+    border-color: #6366f1;
+}
+
+.create-team-box button {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.create-team-box button:hover {
+    transform: scale(1.05);
+}
+
+/* --- גריד הצוותים --- */
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* --- כרטיס צוות --- */
+/* --- כרטיס צוות סגלגל --- */
+.team-card {
+    /* רקע סגלגל עדין */
+    background-color: #f3f0ff; 
+    border-radius: 20px;
+    padding: 25px;
+    /* צל סגלגל רך */
+    box-shadow: 0 10px 20px rgba(107, 70, 193, 0.05);
+    border: 1px solid #e0d7ff;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    /* העצמת הצל במעבר עכבר */
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.15);
+    border-color: #c7b8ff;
+    background-color: #ece7ff; /* הכהיה קלה של הסגלגל ב-hover */
+}
+
+.team-card h3 {
+    color: #4c1d95; /* סגול כהה לכותרת */
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.team-card p {
+    color: #5b21b6; /* טקסט סגול-ביניים */
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.team-card .date {
+    font-size: 0.85rem;
+    color: #7c3aed; /* תאריך בסגול בהיר יותר */
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* --- אזור הוספת חבר בתוך הכרטיס --- */
+.add-member-section {
+    background: rgba(255, 255, 255, 0.5); /* לבן שקוף למחצה על הרקע הסגול */
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(124, 58, 237, 0.1);
 }
 
 .add-member-section h4 {
-  font-size: 0.9rem;
-  margin-bottom: 5px;
-  color: #555;
+    font-size: 0.9rem;
+    color: #4c1d95;
+    margin-bottom: 10px;
 }
-
-.add-member-section input, 
-.add-member-section select {
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+.add-member-section .inputs-row {
+    display: flex;
+    gap: 8px;
+}
+.add-member-section input, .add-member-section select {
+    border: 1px solid #e2e8f0;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    flex: 1;
 }
 
 .add-member-section button {
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  border-radius: 4px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
-.add-member-section button:hover {
-  background-color: #5a6268;
+/* --- כפתור צפייה בפרויקטים --- */
+.view-btn {
+    background: #ffffff; /* כפתור לבן שבולט על הרקע הסגלגל */
+    color: #6366f1;
+    border: 1px solid #6366f1;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    margin-top: auto;
 }
+
+.view-btn:hover {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+/* --- אזור הוספת חבר ---
+.add-member-section {
+    background: #f8faff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.add-member-section h4 {
+    font-size: 0.9rem;
+    color: #1e1b4b;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+/* --- כפתור צפייה בפרויקטים --- */
+/* .view-btn {
+    background: transparent;
+    color: #6366f1;
+    border: 2px solid #6366f1;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    margin-top: auto; /* דוחף את הכפתור לתחתית הכרטיס */
+/* }/* */
+
+.view-btn:hover {
+    background: #6366f1;
+    color: white;
+} 
+
+/* הודעה כשאין צוותים */
+.empty-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px;
+    color: #94a3b8;
+    background: #f8fafc;
+    border-radius: 20px;
+    border: 2px dashed #e2e8f0;
 }
