@@ -1,4 +1,4 @@
-// src/app/shared/directives/scroll-reveal.directive.ts
+
 import { Directive, ElementRef, OnInit, inject } from '@angular/core';
 
 @Directive({
@@ -13,7 +13,7 @@ export class ScrollRevealDirective implements OnInit {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           this.el.nativeElement.classList.add('revealed');
-          observer.unobserve(this.el.nativeElement); // מפעיל רק פעם אחת
+          observer.unobserve(this.el.nativeElement); 
         }
       });
     }, { threshold: 0.1 });

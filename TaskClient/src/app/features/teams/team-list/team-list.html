@@ -6,54 +6,57 @@
       <button (click)="onCreateTeam()">+ צור צוות</button>
     </div>
   </header>
-<div class="header-actions">
+  <div class="header-actions">
     <button class="btn-info" (click)="showUsersList.set(!showUsersList())">
       {{ showUsersList() ? 'סגור רשימת משתמשים' : 'הצג את כל המשתמשים במערכת' }}
     </button>
   </div>
 
   @if (showUsersList()) {
-    <div class="users-directory" appReveal>
-      <h3>👥 ספר משתמשים</h3>
-      <div class="users-grid">
-        @for (user of allUsers(); track user.id) {
-          <div class="user-item">
-            <span class="user-name">{{ user.name }}</span>
-            <span class="user-id">ID: {{ user.id }}</span>
-            <button class="btn-copy" (click)="selectUserForAdd(user.id)">בחר</button>
-          </div>
-        }
+  <div class="users-directory" appReveal>
+    <h3>👥 ספר משתמשים</h3>
+    <div class="users-grid">
+      @for (user of allUsers(); track user.id) {
+      <div class="user-item">
+        <span class="user-name">{{ user.name }}</span>
+        <span class="user-id">ID: {{ user.id }}</span>
+        <button class="btn-copy" (click)="selectUserForAdd(user.id)">בחר</button>
       </div>
+      }
     </div>
+  </div>
   }
   <div class="teams-grid">
     @for (team of teams(); track team.id) {
     <div class="team-card">
-      <h3>{{ team.name }}</h3>
-      <p>חברים בצוות: {{ team.members_count }}</p>
-      <span class="date">נוצר ב: {{ team.created_at | date:'dd/MM/yyyy' }}</span>
-      <div class="add-member-section">
-        <button class="btn-delete" (click)="onDeleteTeam(team.id)">🗑️</button>
-        <div class="content">
-          <p>חברים: {{ team.members_count }}</p>
-          <div class="team-actions">
-            <button class="btn-secondary" (click)="onGetTeamMembers(team.id)">
-              👥 ניהול חברים
-            </button>
+      <button class="btn-delete-top" (click)="onDeleteTeam(team.id)" title="מחק צוות">🗑️</button>
 
-            <div class="add-member">
-              <input type="number" [(ngModel)]="memberForm.userId" placeholder="ID">
-              <button (click)="onAddMember(team.id)">הוסף חבר</button>
-            </div>
+      <div class="card-header-info">
+        <h3>{{ team.name }}</h3>
+        <span class="date">נוצר ב: {{ team.created_at | date:'dd/MM/yyyy' }}</span>
+      </div>
 
-          </div>
+      <div class="card-content">
+        <div class="member-stat">
+          <span class="icon">👥</span>
+          <p>חברים בצוות: <strong>{{ team.members_count }}</strong></p>
+        </div>
 
-          <button class="view-btn" [routerLink]="['/teams', team.id, 'projects']">
-            צפה בפרויקטים
+        <div class="team-management">
+          <button class="btn-secondary-modern" (click)="onGetTeamMembers(team.id)">
+            ניהול חברים
           </button>
+
+          <div class="quick-add-member">
+            <input type="number" [(ngModel)]="memberForm.userId" placeholder="ID">
+            <button (click)="onAddMember(team.id)">הוסף</button>
+          </div>
         </div>
       </div>
 
+      <button class="view-btn" [routerLink]="['/teams', team.id, 'projects']">
+        צפה בפרויקטים
+      </button>
     </div>
     }
     @empty {

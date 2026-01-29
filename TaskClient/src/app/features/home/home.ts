@@ -11,5 +11,5 @@ import { ScrollRevealDirective } from "../../shared/directives/scroll-reveal";
   styleUrl: './home.css',
 })
 export class Home {
-authService = inject(AuthService);
+  authService = inject(AuthService);
 }

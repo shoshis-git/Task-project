@@ -11,19 +11,18 @@ export class TaskService {
   private http = inject(HttpClient);
   private readonly API_URL = `${environment.apiUrl}/tasks`;
 
-  // הסיגנל המרכזי שמחזיק את כל המשימות של הפרויקט הנוכחי
+
   private tasksSignal = signal<Tasks[]>([]);
 
-  // סיגנלים מחושבים (Computed) שמפלטרים את המשימות אוטומטית לפי סטטוס
+
   todoTasks = computed(() => this.tasksSignal().filter(t => t.status === 'todo'));
   inProgressTasks = computed(() => this.tasksSignal().filter(t => t.status === 'in-progress'));
   doneTasks = computed(() => this.tasksSignal().filter(t => t.status === 'done'));
 
-  // פונקציה לטעינת משימות ועדכון הסיגנל
   getTasks(projectId: number): Observable<Tasks[]> {
     const params = new HttpParams().set('projectId', projectId.toString());
     return this.http.get<Tasks[]>(this.API_URL, { params }).pipe(
-      tap(tasks => this.tasksSignal.set(tasks)) // מעדכן את ה-Signal ברגע שהנתונים מגיעים
+      tap(tasks => this.tasksSignal.set(tasks))
     );
   }
 
@@ -33,9 +32,9 @@ export class TaskService {
     );
   }
 
-  updateTask(id: number, updates: { status?: string; priority?: string }): Observable<Tasks> {
+  updateTask(id: number, updates: { status?: string; priority?: string; assignee_id?: number }): Observable<Tasks> {
     return this.http.patch<Tasks>(`${this.API_URL}/${id}`, updates).pipe(
-      tap(updatedTask => this.tasksSignal.update(tasks => 
+      tap(updatedTask => this.tasksSignal.update(tasks =>
         tasks.map(t => t.id === id ? updatedTask : t)
       ))
     );

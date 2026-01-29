@@ -7,12 +7,14 @@
 
   <div class="projects-list">
     @for (project of filteredProjects(); track project.id) {
-      <div class="project-item" [routerLink]="['/tasks', project.id]">
+      <div class="project-item" >
         <div class="info">
           <h4>{{ project.name }}</h4>
           <p>{{ project.description }}</p>
         </div>
-        <span class="status-badge">צפה במשימות</span>
+        <span [routerLink]="['/tasks', project.id]" class="status-badge">צפה במשימות</span>
+        <button class="btn-delete-icon" (click)="onDeleteProject(project.id)">🗑️</button>
+        <button class="btn-edit-icon" (click)="onEditProject(project)" title="ערוך פרויקט">✏️</button>
       </div>
     } @empty {
       <div class="empty-state">

@@ -72,4 +72,77 @@ export class ProjectList {
 
     });
   }
+
+
+  onDeleteProject(projectId: number) {
+    Swal.fire({
+      title: 'למחוק את הפרויקט?',
+      text: "כל המשימות בתוך הפרויקט יימחקו לצמיתות!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444',
+      confirmButtonText: 'כן, מחק פרויקט'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.projectService.deleteProject(projectId).subscribe({
+          next: () => {
+            this.allProjects.update(prev => prev.filter(p => p.id !== projectId));
+            Swal.fire('נמחק!', 'הפרויקט הוסר.', 'success');
+          },
+          error: (err) => {
+            const msg = err.status === 403 ? 'רק חבר צוות מורשה למחוק פרויקטים' : 'שגיאה במחיקה';
+            Swal.fire('אופס', msg, 'error');
+          }
+        });
+      }
+    });
+  }
+
+
+  onEditProject(project: Projects) {
+    Swal.fire({
+      title: 'עריכת פרויקט',
+      html: `
+      <input id="swal-name" class="swal2-input" placeholder="שם הפרויקט" value="${project.name}">
+      <textarea id="swal-desc" class="swal2-textarea" placeholder="תיאור הפרויקט">${project.description || ''}</textarea>
+    `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'שמור שינויים',
+      cancelButtonText: 'ביטול',
+      preConfirm: () => {
+        const name = (document.getElementById('swal-name') as HTMLInputElement).value;
+        const description = (document.getElementById('swal-desc') as HTMLTextAreaElement).value;
+
+        if (!name) {
+          Swal.showValidationMessage('חובה להזין שם לפרויקט');
+        }
+        return { name, description };
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.projectService.updateProject(project.id, result.value).subscribe({
+          next: (updatedProject) => {
+
+            this.allProjects.update(prev =>
+              prev.map(p => p.id === project.id ? updatedProject : p)
+            );
+
+            Swal.fire({
+              icon: 'success',
+              title: 'הפרויקט עודכן!',
+              timer: 1500,
+              showConfirmButton: false,
+              toast: true,
+              position: 'top-end'
+            });
+          },
+          error: (err) => {
+            const msg = err.status === 403 ? 'אין לך הרשאה לערוך פרויקט זה' : 'שגיאה בעדכון';
+            Swal.fire('אופס', msg, 'error');
+          }
+        });
+      }
+    });
+  }
 }

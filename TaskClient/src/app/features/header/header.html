@@ -3,6 +3,7 @@
     <div class="nav-brand" routerLink="/">
         <span class="brand-task">Task</span><span class="brand-flow">Flow</span>
     </div>
+    @if(authService.currentUser() ){
     <ul class="nav-links">
         <li><a routerLink="/teams" routerLinkActive="active">הצוותים שלי</a></li>
 
@@ -12,4 +13,5 @@
         <span>שלום, <strong>{{ authService.currentUser()?.name }}</strong></span>
         <button class="logout-btn" (click)="onLogout()">התנתק</button>
     </div>
+    }
 </nav>

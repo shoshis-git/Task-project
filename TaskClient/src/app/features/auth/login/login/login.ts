@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth/auth';
-import { Router ,RouterLink,RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ ReactiveFormsModule, CommonModule, RouterModule],
-  templateUrl:'./login.html',
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login implements OnInit {
@@ -23,7 +23,7 @@ export class Login implements OnInit {
   errorMessage: string = '';
 
   ngOnInit() {
-    // אם כבר מחובר - אין סיבה להיות פה
+
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/teams']);
     }
@@ -35,7 +35,6 @@ export class Login implements OnInit {
     this.authService.login(this.loginForm.value as any).subscribe({
       next: () => this.router.navigate(['/teams']),
       error: (err) => {
-        // לקיחת ההודעה מהשרת אם קיימת
         this.errorMessage = err.error?.message || 'המייל או הסיסמה אינם נכונים';
       }
     });

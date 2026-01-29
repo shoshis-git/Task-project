@@ -1,8 +1,8 @@
 <div class="login-container">
   <div class="auth-header">
-  <h2 routerLink="/">TaskFlow</h2>
-  <p>ברוכים השבים! היכנסו כדי להמשיך לזרום עם המשימות שלכם.</p>
-</div>
+    <h2 routerLink="/">TaskFlow</h2>
+    <p>ברוכים השבים! היכנסו כדי להמשיך לזרום עם המשימות שלכם.</p>
+  </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-card">
     <h2>התחברות למערכת</h2>
 
@@ -10,9 +10,9 @@
       <label>אימייל</label>
       <input type="email" formControlName="email" placeholder="enter@email.com">
       @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
-            <span class="error">
-                מייל לא תקין
-            </span>
+      <span class="error">
+        מייל לא תקין
+      </span>
       }
     </div>
 
@@ -21,11 +21,11 @@
       <input type="password" formControlName="password" placeholder="******">
     </div>
     @if(errorMessage) {
-      <p class="server-error">{{ errorMessage }}</p>
+    <p class="server-error">{{ errorMessage }}</p>
     }
 
     <button type="submit" [disabled]="loginForm.invalid">התחבר</button>
-    
+
     <div class="footer-links">
       <span>עוד לא רשומה? </span>
       <a routerLink="/register">צרי חשבון חדש</a>

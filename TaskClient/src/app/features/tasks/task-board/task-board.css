@@ -265,3 +265,117 @@
     color: #ef4444; /* אדום */
     transform: rotate(90deg); /* אפקט סיבוב קטן ומגניב */
 }
+.btn-filter {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #d1d5db;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #374151;
+}
+
+.btn-filter:hover {
+  background: #f3f4f6;
+}
+
+/* עיצוב כשהסינון פעיל */
+.btn-filter.active-filter {
+  background: #6366f1;
+  color: white;
+  border-color: #4f46e5;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+}
+
+.filter-toggle {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+.task-count-badge {
+  background: #ef4444; /* אדום בולט */
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.btn-filter.active-filter .task-count-badge {
+  background: white;
+  color: #6366f1;
+}
+/* --- עיצוב אזור הקצאת אחראי --- */
+.assign-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8faff; /* רקע כחלחל בהיר מאוד להפרדה */
+    padding: 8px 12px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #eef2ff;
+}
+
+.assign-section label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+    white-space: nowrap; /* מונע מהטקסט לרדת שורה */
+}
+
+/* --- עיצוב ה-Select של חברי הצוות --- */
+.member-select {
+    flex: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #1e1b4b;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+    /* הוספת אייקון חץ קטן ומעוצב */
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236366f1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 8px center;
+    background-size: 14px;
+    padding-left: 28px;
+}
+
+.member-select:hover {
+    background-color: #ffffff;
+    border-color: #dbeafe;
+}
+
+.member-select:focus {
+    background-color: #ffffff;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* עיצוב האופציות בתוך ה-Select */
+.member-select option {
+    background: white;
+    color: #1e1b4b;
+    padding: 10px;
+}
+
+/* --- התאמה למצב רשימה (List View) --- */
+.list-view .assign-section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 0;
+    min-width: 180px;
+}
+
+.list-view .member-select {
+    border-bottom: 1px dashed #cbd5e1;
+    border-radius: 0;
+}

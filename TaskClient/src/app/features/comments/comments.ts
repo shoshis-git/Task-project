@@ -3,6 +3,8 @@ import { CommentService } from '../../core/services/comment/comment-service';
 import { Comments } from '../../shared/modales';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TaskService } from '../../core/services/task/task-service';
+import { TaskBoard } from '../tasks/task-board/task-board';
 
 @Component({
   selector: 'app-comments',
@@ -11,8 +13,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './comments.css',
 })
 export class CommentsComponent {
-private commentService = inject(CommentService);
-  
+  private commentService = inject(CommentService);
+  private taskService = inject(TaskBoard)
 
   taskId = input.required<number>();
   comments = signal<Comments[]>([]);
@@ -29,7 +31,7 @@ private commentService = inject(CommentService);
   }
 
   sendComment() {
-   
+
     if (!this.newCommentBody().trim()) return;
 
     this.commentService.addComment({
@@ -37,7 +39,15 @@ private commentService = inject(CommentService);
       body: this.newCommentBody()
     }).subscribe(newComment => {
       this.comments.update(prev => [...prev, newComment]);
-      this.newCommentBody.set(''); 
+      this.newCommentBody.set('');
     });
+  }
+
+
+  closeComments(): void {
+
+    this.taskService.closeComments()
+
+
   }
 }

@@ -1,27 +1,27 @@
-export interface User{
+export interface User {
     id: number;
     name: string;
     email: string;
     role: string;
 }
-export interface Teams{
-members: any;
+export interface Teams {
+    members: any;
     id: number;
     name: string;
     created_at: Date;
     members_count: number;
 
 }
-export interface Projects{
+export interface Projects {
     id: number;
     team_id: number;
     name: string;
     description: string;
-    statues:'todo' | 'in-progress' | 'done';
+    statues: 'todo' | 'in-progress' | 'done';
     created_at: Date;
 }
-export interface Tasks{
-comments_count: any;
+export interface Tasks {
+    comments_count: any;
     id: number;
     project_id: number;
     title: string;
@@ -34,7 +34,7 @@ comments_count: any;
     created_at: Date;
     updated_at: Date;
 }
-export interface Comments{
+export interface Comments {
     id: number;
     task_id: number;
     user_id: number;

@@ -256,3 +256,75 @@
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     transform: translateY(-2px);
 }
+.swal2-input, .swal2-textarea {
+  width: 90% !important;
+  margin: 10px auto !important;
+  font-family: inherit;
+  border-radius: 8px !important;
+}
+
+.swal2-textarea {
+  height: 100px !important;
+}
+/* --- כפתורי פעולה (עריכה ומחיקה) בתוך פריט פרויקט --- */
+.btn-delete-icon, .btn-edit-icon {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* עיצוב כפתור מחיקה - גוון אדמדם עדין שמשתלב עם סגול */
+.btn-delete-icon {
+    color: #ef4444;
+    background: #fef2f2;
+}
+
+.btn-delete-icon:hover {
+    background: #fee2e2;
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.1);
+}
+
+/* עיצוב כפתור עריכה - גוון סגול-כחול של האתר */
+.btn-edit-icon {
+    color: #6366f1;
+    background: #f5f3ff;
+}
+
+.btn-edit-icon:hover {
+    background: #ede9fe;
+    color: #4f46e5;
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.1);
+}
+
+/* התאמת פריסת הפריט להכלת הכפתורים */
+.project-item {
+    gap: 15px; /* הוספת ריווח בין האלמנטים */
+}
+
+/* דחיפת הכפתורים לשמאל (בגלל שהעמוד ב-RTL) */
+.info {
+    flex: 1;
+}
+
+/* התאמת רגישות במובייל - שהכפתורים לא יברחו */
+@media (max-width: 600px) {
+    .project-item {
+        flex-wrap: wrap;
+    }
+    .status-badge {
+        order: 2;
+    }
+    .btn-edit-icon, .btn-delete-icon {
+        order: 1;
+    }
+}

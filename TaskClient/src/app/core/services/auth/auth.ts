@@ -12,42 +12,42 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   private readonly API_URL = `${environment.apiUrl}/auth`;
-  
+
 
   currentUser = signal<User | null>(null);
 
-constructor(private http: HttpClient) {
-  this.checkSession();
-}
-
-checkSession() {
-  const token = this.getToken();
-  if (token) {
-    // קריאה לנתיב me שקיים אצלך בשרת
-    this.http.get<User>(`${environment.apiUrl}/auth/me`).subscribe({
-      next: (user) => {
-        this.currentUser.set(user);
-      },
-      error: () => {
-        this.logout(); // אם הטוקן לא תקין, ננקה הכל
-      }
-    });
+  constructor(private http: HttpClient) {
+    this.checkSession();
   }
-}
+
+  checkSession() {
+    const token = this.getToken();
+    if (token) {
+      // קריאה לנתיב me שקיים אצלך בשרת
+      this.http.get<User>(`${environment.apiUrl}/auth/me`).subscribe({
+        next: (user) => {
+          this.currentUser.set(user);
+        },
+        error: () => {
+          this.logout();
+        }
+      });
+    }
+  }
 
 
-  login(credentials: { email: string; password: string }): Observable<{token: string, user: User}> {
-    return this.http.post<{token: string, user: User}>(`${this.API_URL}/login`, credentials)
+  login(credentials: { email: string; password: string }): Observable<{ token: string, user: User }> {
+    return this.http.post<{ token: string, user: User }>(`${this.API_URL}/login`, credentials)
       .pipe(tap(res => this.handleAuthentication(res)));
   }
 
 
-  register(data: { name: string; email: string; password: string }): Observable<{token: string, user: User}> {
-    return this.http.post<{token: string, user: User}>(`${this.API_URL}/register`, data)
+  register(data: { name: string; email: string; password: string }): Observable<{ token: string, user: User }> {
+    return this.http.post<{ token: string, user: User }>(`${this.API_URL}/register`, data)
       .pipe(tap(res => this.handleAuthentication(res)));
   }
 
-  private handleAuthentication(res: {token: string, user: User}) {
+  private handleAuthentication(res: { token: string, user: User }) {
     localStorage.setItem('token', res.token);
     this.currentUser.set(res.user);
   }
@@ -63,6 +63,6 @@ checkSession() {
   logout() {
     localStorage.removeItem('token');
     this.currentUser.set(null);
-   
+
   }
 }

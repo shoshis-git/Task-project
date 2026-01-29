@@ -168,37 +168,6 @@ header h1 {
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
-/* --- אזור הוספת חבר ---
-.add-member-section {
-    background: #f8faff;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-}
-
-.add-member-section h4 {
-    font-size: 0.9rem;
-    color: #1e1b4b;
-    margin-bottom: 10px;
-}
-
-
-
-
-
-/* --- כפתור צפייה בפרויקטים --- */
-/* .view-btn {
-    background: transparent;
-    color: #6366f1;
-    border: 2px solid #6366f1;
-    padding: 12px;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s;
-    margin-top: auto; /* דוחף את הכפתור לתחתית הכרטיס */
-/* }/* */
 
 .view-btn:hover {
     background: #6366f1;
@@ -284,4 +253,165 @@ header h1 {
   padding: 4px 10px;
   cursor: pointer;
   font-size: 0.8rem;
+}
+
+
+
+
+
+
+/* --- כפתור הצגת משתמשים (btn-info) --- */
+.header-actions {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-info {
+    background: rgba(99, 102, 241, 0.1);
+    color: #4f46e5;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 10px 20px;
+    border-radius: 50px; /* כפתור גלולה */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-info:hover {
+    background: #6366f1;
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+    transform: translateY(-2px);
+}
+
+/* --- סידור מחדש של ה-Team Card --- */
+.team-card {
+    position: relative;
+    background-color: #f3f0ff;
+    border-radius: 24px;
+    padding: 25px;
+    border: 1px solid #e0d7ff;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px; /* גובה אחיד לכל הכרטיסים */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-delete-top {
+    position: absolute;
+    top: 15px;
+    left: 15px; /* בגלל ה-RTL */
+    background: white;
+    border: 1px solid #fee2e2;
+    color: #ef4444;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.btn-delete-top:hover {
+    background: #ef4444;
+    color: white;
+    transform: rotate(15deg);
+}
+
+.card-header-info {
+    margin-bottom: 15px;
+}
+
+.card-header-info h3 {
+    margin: 0;
+    color: #4c1d95;
+    font-size: 1.6rem;
+}
+
+.card-header-info .date {
+    font-size: 0.8rem;
+    color: #7c3aed;
+}
+
+/* סטטיסטיקה */
+.member-stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 8px 12px;
+    border-radius: 12px;
+}
+
+.member-stat p {
+    margin: 0;
+    color: #5b21b6;
+}
+
+/* ניהול חברים */
+.team-management {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-secondary-modern {
+    background: #9c63f1;
+    border: 1px solid #d1d5db;
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-secondary-modern:hover {
+    background: #f9fafb;
+    border-color: #9c63f1;
+    color: #9c63f1;
+}
+
+.quick-add-member {
+    display: flex;
+    gap: 5px;
+}
+
+.quick-add-member input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    outline: none;
+}
+
+.quick-add-member button {
+    background: #9c63f1;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.quick-add-member button:hover {
+    background: white;
+    color: #9c63f1;
+}
+
+/* כפתור תחתון נצמד */
+.view-btn {
+    margin-top: auto; /* דוחף את הכפתור לתחתית */
+    width: 100%;
 }

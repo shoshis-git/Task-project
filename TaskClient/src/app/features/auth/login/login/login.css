@@ -1,23 +1,25 @@
-/* --- מכולה ראשית --- */
+
 .login-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* מסדר את האלמנטים מלמעלה למטה */
+    justify-content: flex-start; /* דוחף הכל לתחילת הדף */
     align-items: center;
-    min-height: 90vh;
+    min-height: 100vh; /* תופס את כל גובה המסך */
     direction: rtl;
-    background-color: #f8faff; /* הרקע הכחלחל של האתר */
+    background-color: #f8faff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px 20px;
 }
-
 /* --- כרטיס ההתחברות --- */
 .login-card {
     background: #ffffff;
     padding: 45px;
     border-radius: 28px;
-    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.08); /* צל סגלגל עדין */
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.08);
     width: 100%;
     max-width: 420px;
     border: 1px solid #f1f5f9;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 h2 {
@@ -129,3 +131,53 @@ button:disabled {
     background-color: #f5f3ff; /* רקע סגלגל בהיר מאוד */
     text-decoration: underline;
 }
+
+
+
+
+
+
+/* --- כותרת עליונה (Auth Header) --- */
+.auth-header {
+    text-align: center;
+    margin-bottom: 50px; /* רווח בין הכותרת לכרטיס ה-Login */
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.auth-header h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    transition: transform 0.3s ease;
+}
+
+.auth-header h2:hover {
+    transform: scale(1.05);
+}
+
+.auth-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+
+
+/* אנימציות כניסה חלקה */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+

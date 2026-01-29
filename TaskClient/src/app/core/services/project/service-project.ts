@@ -11,7 +11,7 @@ export class ServiceProject {
   private http = inject(HttpClient);
   private readonly API_URL = `${environment.apiUrl}/projects`;
 
-  
+
   getProjects(): Observable<Projects[]> {
     return this.http.get<Projects[]>(this.API_URL);
   }
@@ -19,5 +19,14 @@ export class ServiceProject {
 
   createProject(projectData: { teamId: number; name: string; description: string }): Observable<Projects> {
     return this.http.post<Projects>(this.API_URL, projectData);
+  }
+
+  deleteProject(projectId: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${projectId}`);
+  }
+
+
+  updateProject(projectId: number, data: Partial<Projects>): Observable<Projects> {
+    return this.http.patch<Projects>(`${this.API_URL}/${projectId}`, data);
   }
 }

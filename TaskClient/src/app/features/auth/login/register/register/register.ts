@@ -19,13 +19,13 @@ export class Register implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]] // שדה חדש
+      confirmPassword: ['', [Validators.required]]
     }, {
-      validators: this.passwordMatchValidator // הוספת הולידטור לקבוצה
+      validators: this.passwordMatchValidator
     });
   }
 
-  // פונקציה שבודקת התאמה בין הסיסמאות
+
   passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');

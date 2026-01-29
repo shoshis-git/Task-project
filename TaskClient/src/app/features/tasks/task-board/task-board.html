@@ -7,7 +7,19 @@
         <button (click)="isListView = false" [class.active]="!isListView">📊 לוח</button>
         <button (click)="isListView = true" [class.active]="isListView">📝 רשימה</button>
       </div>
+      <div class="filter-toggle">
+        <button (click)="onlyMyTasks.set(!onlyMyTasks())" [class.active-filter]="onlyMyTasks()" class="btn-filter">
 
+          @if (onlyMyTasks()) {
+          👤 הצג את כל המשימות
+          } @else {
+          🔍 המשימות שלי בלבד
+          <span class="task-count-badge">
+
+          </span>
+          }
+        </button>
+      </div>
       <div class="quick-add">
         <input [(ngModel)]="newTaskTitle" placeholder="משימה חדשה..." />
         <button (click)="addTask()">הוסף +</button>
@@ -26,6 +38,15 @@
           <div class="card-body">
             <h4>{{ task.title }}</h4>
             <p>{{ task.description }}</p>
+            <div class="assign-section">
+              <label>👤 אחראי:</label>
+              <select [ngModel]="task.assignee_id" (ngModelChange)="assignUser(task.id, $event)" class="member-select">
+                <option [ngValue]="null">טרם הוקצה</option>
+                @for (member of teamMembers(); track member.id) {
+                <option [value]="member.id">{{ member.name }}</option>
+                }
+              </select>
+            </div>
             <div class="priority-selector">
               <small>עדיפות: </small>
               <select class="modern-select" [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
@@ -37,26 +58,29 @@
           </div>
           <div class="task-meta-info">
             <button class="comments-trigger" (click)="openComments(task)">
-              💬 תגובות ({{ task.comments_count || 0 }})
+              💬 תגובות
             </button>
           </div>
 
-          @if (activeTaskForComments) {
-          <div class="modal-overlay" (click)="closeComments()">
-            <div class="modal-content comments-modal" (click)="$event.stopPropagation()">
-              <div class="modal-header">
-                <h3>תגובות למשימה: <span>{{ activeTaskForComments.title }}</span></h3>
-                <button class="close-btn" (click)="closeComments()">×</button>
-              </div>
-              <div class="modal-body">
-                <app-comments [taskId]="activeTaskForComments.id"></app-comments>
-              </div>
-            </div>
-          </div>
-          }
+
           <div class="card-footer status-btns">
             <button class="prime" (click)="changeStatus(task, 'in-progress')">התחל ←</button>
             <button class="btn-del" (click)="deleteTask(task.id)">🗑️</button>
+          </div>
+        </div>
+        }
+
+
+        @if (activeTaskForComments) {
+        <div class="modal-overlay" (click)="closeComments()">
+          <div class="modal-content comments-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+              <h3>תגובות למשימה: <span>{{ activeTaskForComments.title }}</span></h3>
+              <button class="close-btn" (click)="closeComments()">×</button>
+            </div>
+            <div class="modal-body">
+              <app-comments [taskId]="activeTaskForComments.id"></app-comments>
+            </div>
           </div>
         </div>
         }
@@ -73,6 +97,15 @@
         <div class="task-card in-progress">
           <h4>{{ task.title }}</h4>
           <p>{{ task.description }}</p>
+          <div class="assign-section">
+            <label>👤 אחראי:</label>
+            <select [ngModel]="task.assignee_id" (ngModelChange)="assignUser(task.id, $event)" class="member-select">
+              <option [ngValue]="null">טרם הוקצה</option>
+              @for (member of teamMembers(); track member.id) {
+              <option [value]="member.id">{{ member.name }}</option>
+              }
+            </select>
+          </div>
           <div class="priority-selector">
             <small>עדיפות: </small>
             <select class="modern-select" [ngModel]="task.priority" (ngModelChange)="changePriority(task, $event)">
@@ -83,29 +116,19 @@
           </div>
           <div class="task-meta-info">
             <button class="comments-trigger" (click)="openComments(task)">
-              💬 תגובות ({{ task.comments_count || 0 }})
+              💬 תגובות
             </button>
           </div>
 
-          @if (activeTaskForComments) {
-          <div class="modal-overlay" (click)="closeComments()">
-            <div class="modal-content comments-modal" (click)="$event.stopPropagation()">
-              <div class="modal-header">
-                <h3>תגובות למשימה: <span>{{ activeTaskForComments.title }}</span></h3>
-                <button class="close-btn" (click)="closeComments()">×</button>
-              </div>
-              <div class="modal-body">
-                <app-comments [taskId]="activeTaskForComments.id"></app-comments>
-              </div>
-            </div>
-          </div>
-          }
+
 
           <div class="actions status-btns">
             <button class="success" (click)="changeStatus(task, 'done')">→ סיים</button>
             <button (click)="changeStatus(task, 'todo')">← לביצוע</button>
           </div>
         </div>
+
+
         }
       </div>
     </div>
@@ -117,30 +140,27 @@
         <div class="task-card done">
           <h4>{{ task.title }}</h4>
           <p>{{ task.description }}</p>
-             <div class="task-meta-info">
-            <button class="comments-trigger" (click)="openComments(task)">
-              💬 תגובות ({{ task.comments_count || 0 }})
-            </button>
-                      @if (activeTaskForComments) {
-          <div class="modal-overlay" (click)="closeComments()">
-            <div class="modal-content comments-modal" (click)="$event.stopPropagation()">
-              <div class="modal-header">
-                <h3>תגובות למשימה: <span>{{ activeTaskForComments.title }}</span></h3>
-                <button class="close-btn" (click)="closeComments()">×</button>
-              </div>
-              <div class="modal-body">
-                <app-comments [taskId]="activeTaskForComments.id"></app-comments>
-              </div>
-            </div>
+          <div class="assign-section">
+            <label>👤 אחראי:</label>
+            <select [ngModel]="task.assignee_id" (ngModelChange)="assignUser(task.id, $event)" class="member-select">
+              <option [ngValue]="null">טרם הוקצה</option>
+              @for (member of teamMembers(); track member.id) {
+              <option [value]="member.id">{{ member.name }}</option>
+              }
+            </select>
           </div>
-          }
+          <div class="task-meta-info">
+            <button class="comments-trigger" (click)="openComments(task)">
+              💬 תגובות
+            </button>
+
           </div>
           <div class="actions status-btns">
             <button (click)="changeStatus(task, 'todo')">החזר לביצוע</button>
             <button class="del" (click)="deleteTask(task.id)">מחק</button>
           </div>
         </div>
-        
+
         }
       </div>
     </div>
