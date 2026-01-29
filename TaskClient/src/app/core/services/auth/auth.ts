@@ -16,19 +16,24 @@ export class AuthService {
 
   currentUser = signal<User | null>(null);
 
-  constructor(private http: HttpClient) {
-    const token = localStorage.getItem('token');
+constructor(private http: HttpClient) {
+  this.checkSession();
+}
+
+checkSession() {
+  const token = this.getToken();
   if (token) {
-    const decoded: any = jwtDecode(token);
-    
-    this.currentUser.set({
-      id: decoded.id,
-      name: decoded.name,
-      email: decoded.email,
-      role: decoded.role,
+    // קריאה לנתיב me שקיים אצלך בשרת
+    this.http.get<User>(`${environment.apiUrl}/auth/me`).subscribe({
+      next: (user) => {
+        this.currentUser.set(user);
+      },
+      error: () => {
+        this.logout(); // אם הטוקן לא תקין, ננקה הכל
+      }
     });
   }
-  }
+}
 
 
   login(credentials: { email: string; password: string }): Observable<{token: string, user: User}> {

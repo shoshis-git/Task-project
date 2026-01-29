@@ -25,6 +25,14 @@
     @if(errorMessage) {
       <p class="server-error">{{ errorMessage }}</p>
     }
+    <div class="form-group">
+  <label>אימות סיסמה</label>
+  <input type="password" formControlName="confirmPassword" placeholder="הקלידו שוב את הסיסמה">
+  
+  @if (registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched) {
+    <small class="error-text">הסיסמאות אינן תואמות.</small>
+  }
+</div>
     <button type="submit" [disabled]="registerForm.invalid">הרשמה</button>
     <p>כבר יש לך חשבון? <a routerLink="/login">התחבר כאן</a></p>
 </form>

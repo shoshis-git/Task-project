@@ -5,6 +5,7 @@ export interface User{
     role: string;
 }
 export interface Teams{
+members: any;
     id: number;
     name: string;
     created_at: Date;

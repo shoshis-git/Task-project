@@ -11,28 +11,33 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.css',
 })
 export class Login implements OnInit {
-  loginForm: FormGroup;
-  constructor(private fb: FormBuilder) {  this.loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
-  });}
   private authService = inject(AuthService);
   private router = inject(Router);
- 
-  ngOnInit() {}
+  private fb = inject(FormBuilder);
+
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+
   errorMessage: string = '';
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (res) => {
-         
-          this.router.navigate(['/teams']); 
-        },
-        error: (err) => {
-          this.errorMessage = 'שגיאה בהתחברות. בדקי את המייל והסיסמה.';
-        }
-      });
+  ngOnInit() {
+    // אם כבר מחובר - אין סיבה להיות פה
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/teams']);
     }
+  }
+
+  onSubmit() {
+    if (this.loginForm.invalid) return;
+
+    this.authService.login(this.loginForm.value as any).subscribe({
+      next: () => this.router.navigate(['/teams']),
+      error: (err) => {
+        // לקיחת ההודעה מהשרת אם קיימת
+        this.errorMessage = err.error?.message || 'המייל או הסיסמה אינם נכונים';
+      }
+    });
   }
 }

@@ -25,4 +25,17 @@ export class TeamService {
   addMember(teamId: number, userId: number,role: string): Observable<any> {
     return this.http.post(`${this.API_URL}/${teamId}/members`, { userId, role });
   }
+ 
+deleteTeam(teamId: number): Observable<any> {
+  return this.http.delete(`${this.API_URL}/${teamId}`);
+}
+
+removeMember(teamId: number, userId: number): Observable<any> {
+  return this.http.delete(`${this.API_URL}/${teamId}/members/${userId}`);
+}
+
+getTeamMembers(teamId: number): Observable<any[]> {
+  return this.http.get<any[]>(`${this.API_URL}/${teamId}/members`);
+}
+
 }
