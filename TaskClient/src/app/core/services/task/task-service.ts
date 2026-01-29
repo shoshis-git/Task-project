@@ -3,6 +3,7 @@ import { inject, Injectable, signal, computed } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { Tasks } from '../../../shared/modales';
+import { strict } from 'node:assert';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class TaskService {
     );
   }
 
-  createTask(task: { projectId: number; title: string }): Observable<Tasks> {
+  createTask(task: { projectId: number; title: string ;description: string; status: string; priority: string; assignee_id: number|null; due_date: Date|null; }): Observable<Tasks> {
     return this.http.post<Tasks>(this.API_URL, task).pipe(
       tap(newTask => this.tasksSignal.update(tasks => [...tasks, newTask]))
     );

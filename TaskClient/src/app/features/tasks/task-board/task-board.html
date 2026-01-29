@@ -21,9 +21,65 @@
         </button>
       </div>
       <div class="quick-add">
-        <input [(ngModel)]="newTaskTitle" placeholder="משימה חדשה..." />
-        <button (click)="addTask()">הוסף +</button>
+        <button class="add-task-btn" (click)="isAddTaskModalOpen = true">
+          <span class="icon">+</span> משימה חדשה
+        </button>
       </div>
+
+      @if (isAddTaskModalOpen) {
+      <div class="modal-overlay" (click)="closeAddTaskModal()">
+        <div class="modal-content task-modal" (click)="$event.stopPropagation()">
+
+          <div class="modal-header">
+            <h3>🚀 יצירת משימה חדשה</h3>
+            <button class="close-btn" (click)="closeAddTaskModal()">×</button>
+          </div>
+
+          <div class="modal-body">
+            <div class="form-group">
+              <label>כותרת המשימה</label>
+              <input [(ngModel)]="newTask.title" placeholder="מה צריך לעשות?" />
+            </div>
+
+            <div class="form-group">
+              <label>תיאור</label>
+              <textarea [(ngModel)]="newTask.description" placeholder="הוסיפי פרטים נוספים..." rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label>עדיפות</label>
+                <select [(ngModel)]="newTask.priority" class="modern-select">
+                  <option value="low">נמוכה</option>
+                  <option value="medium">בינונית</option>
+                  <option value="high">גבוהה</option>
+                </select>
+              </div>
+
+              <div class="form-group flex-1">
+                <label>תאריך יעד</label>
+                <input type="date" [(ngModel)]="newTask.due_date" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>👤 הקצאה לחבר צוות</label>
+              <select [(ngModel)]="newTask.assignee_id" class="modern-select">
+                <option [ngValue]="null">ללא הקצאה</option>
+                @for (member of teamMembers(); track member.id) {
+                <option [value]="member.id">{{ member.name }}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeAddTaskModal()">ביטול</button>
+            <button class="btn-submit" (click)="saveTask()" [disabled]="!newTask.title">צור משימה</button>
+          </div>
+        </div>
+      </div>
+      }
     </div>
   </header>
 

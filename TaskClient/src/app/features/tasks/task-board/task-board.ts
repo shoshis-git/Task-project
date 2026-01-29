@@ -61,34 +61,88 @@ export class TaskBoard {
   loadTasks() {
     this.taskService.getTasks(this.projectId()).subscribe(data => this.tasks.set(data));
   }
+newTask = {
+  title: '',
+  description: '',
+  priority: 'medium',
+  status: 'todo',
+  assignee_id: null,
+  due_date: null
+};
+saveTask() {
+  const taskData = {
+    projectId: Number(this.projectId()),
+    ...this.newTask
+  };
 
-  addTask() {
-    if (!this.newTaskTitle.trim()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'פעולה נכשלה',
-        text: 'נא להזין כותרת למשימה',
-        confirmButtonColor: '#6366f1'
-      }); return
-    };
-    const taskData = {
-      projectId: Number(this.projectId()),
-      title: this.newTaskTitle,
-      status: 'todo',
-      priority: 'medium'
-    };
-
-    this.taskService.createTask(taskData).subscribe(newTask => {
+  this.taskService.createTask(taskData).subscribe({
+    next: (newTask) => {
       this.tasks.update(prev => [...prev, newTask]);
-      this.newTaskTitle = '';
-      Swal.fire({
+      this.closeAddTaskModal();
+            Swal.fire({
         icon: 'success',
         title: 'משימה נוספה בהצלחה!',
         confirmButtonColor: 'linear-gradient(135deg, #6366f1, #a855f7)',
         timer: 2000
       });
-    });
-  }
+    },
+    error: () => {      
+      Swal.fire({
+        icon: 'error',
+        title: 'פעולה נכשלה',
+        text: 'נא להזין כותרת למשימה',
+        confirmButtonColor: '#6366f1'
+      })}
+  });
+}
+isAddTaskModalOpen = false;
+
+closeAddTaskModal() {
+  this.isAddTaskModalOpen = false;
+  this.resetNewTask();
+}
+
+resetNewTask() {
+  this.newTask = {
+    title: '',
+    description: '',
+    priority: 'medium',
+    status: 'todo',
+    assignee_id: null,
+    due_date: null
+  };
+}
+  // addTask() {
+  //   if (!this.newTaskTitle.trim()) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'פעולה נכשלה',
+  //       text: 'נא להזין כותרת למשימה',
+  //       confirmButtonColor: '#6366f1'
+  //     }); return
+  //   };
+  //   const taskData = {
+  //     projectId: Number(this.projectId()),
+  //     title: this.newTask.title || '', 
+  //      description: this.newTask.description || '',
+  //     status: this.newTask.status || 'todo',
+  //    priority:this.newTask.priority || 'medium',
+  //     assignee_id: this.newTask.assignee_id || null,
+  //     due_date: this.newTask.due_date || null
+     
+  //   };
+
+  //   this.taskService.createTask(taskData).subscribe(newTask => {
+  //     this.tasks.update(prev => [...prev, newTask]);
+  //     this.newTaskTitle = '';
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: 'משימה נוספה בהצלחה!',
+  //       confirmButtonColor: 'linear-gradient(135deg, #6366f1, #a855f7)',
+  //       timer: 2000
+  //     });
+  //   });
+  // }
 
   changeStatus(task: Tasks, newStatus: string) {
     this.taskService.updateTask(task.id, { status: newStatus }).subscribe({
@@ -233,4 +287,16 @@ export class TaskBoard {
 
     task.comments_count = (task.comments_count || 0) + 1;
   }
+
+
+
+
+
+
+
+ 
+
+ 
+
+
 }
