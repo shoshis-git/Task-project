@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://task-project-azk0.onrender.com/api',
+  apiUrl: 'http://localhost:3000/api',
 };

@@ -35,4 +35,14 @@
   </div>
   <button type="submit" [disabled]="registerForm.invalid">הרשמה</button>
   <p>כבר יש לך חשבון? <a routerLink="/login">התחבר כאן</a></p>
+
+
+    @if (isLoading()) {
+    <div class="loader-overlay">
+      <div class="spinner"></div>
+      <p>טוען משימות...</p>
+    </div>
+  } @else {
+    <div class="board-layout">...</div>
+  }
 </form>

@@ -15,7 +15,7 @@ import { UserService } from '../../../core/services/user/user-service';
 export class TeamList {
   private teamService = inject(TeamService);
   private userService = inject(UserService);
-
+isLoading = signal(false);
   allUsers = signal<User[]>([]);
   showUsersList = signal(false);
   teams = signal<Teams[]>([]);
@@ -30,13 +30,27 @@ export class TeamList {
   }
 
   loadTeams() {
-    this.teamService.getTeams().subscribe(data => {
+    this.isLoading.set(true);
+    this.teamService.getTeams().subscribe( {
+      next:(data) => {
+      
       this.teams.set(data);
+      this.isLoading.set(false);},
+      error: () => {
+        this.isLoading.set(false);
+      }
     });
   }
   loadAllUsers() {
-    this.userService.getAllUsers().subscribe(data => {
+    this.isLoading.set(true);
+    this.userService.getAllUsers().subscribe( {
+      next:(data) => {
+      
       this.allUsers.set(data);
+      this.isLoading.set(false);},
+      error: () => {
+        this.isLoading.set(false);
+      }
     });
   }
   onCreateTeam() {

@@ -1,8 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth/auth';
 import { CommonModule } from '@angular/common';
+import { sign } from 'crypto';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +16,7 @@ export class Register implements OnInit {
   registerForm: FormGroup;
   private authService = inject(AuthService);
   private router = inject(Router);
+  isLoading=signal(false);
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -41,14 +44,19 @@ export class Register implements OnInit {
   errorMessage: string = '';
 
   onSubmit() {
+    
     if (this.registerForm.valid) {
+      this.isLoading.set(true);
       this.authService.register(this.registerForm.value).subscribe({
         next: () => {
 
           this.router.navigate(['/teams']);
+          this.isLoading.set(false);
         },
         error: (err) => {
           this.errorMessage = 'שגיאה בהרשמה. נסה שוב.';
+          Swal.fire('שגיאה', this.errorMessage, 'error');
+          this.isLoading.set(false);
         }
       });
     }

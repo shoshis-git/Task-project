@@ -15,7 +15,7 @@ import { TaskBoard } from '../tasks/task-board/task-board';
 export class CommentsComponent {
   private commentService = inject(CommentService);
   private taskService = inject(TaskBoard)
-
+isLoading = signal(false);
   taskId = input.required<number>();
   comments = signal<Comments[]>([]);
   newCommentBody = signal('');
@@ -25,8 +25,17 @@ export class CommentsComponent {
   }
 
   loadComments() {
-    this.commentService.getComments(this.taskId()).subscribe(data => {
-      this.comments.set(data);
+    this.isLoading.set(true);
+    this.commentService.getComments(this.taskId()).subscribe( {
+      next:(data) => {
+        this.comments.set(data);
+      this.isLoading.set(false);
+      }
+      ,
+      error: () => {
+        this.isLoading.set(false);
+        
+      }
     });
   }
 

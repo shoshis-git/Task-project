@@ -18,7 +18,7 @@ export class ProjectList {
 
   allProjects = signal<Projects[]>([]);
   teamId = signal<number>(0);
-
+isLoading = signal(false);
 
   filteredProjects = computed(() =>
     this.allProjects().filter(p => p.team_id === this.teamId())
@@ -36,8 +36,16 @@ export class ProjectList {
   }
 
   loadProjects() {
-    this.projectService.getProjects().subscribe(data => {
-      this.allProjects.set(data);
+    this.isLoading.set(true);
+    this.projectService.getProjects().subscribe({
+      next: (data) => {
+        this.allProjects.set(data);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+      }
+
     });
   }
 

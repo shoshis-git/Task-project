@@ -5,7 +5,14 @@
       <h5>💬 תגובות ({{ comments().length }})</h5>
       <button class="close-popup-btn" (click)="closeComments()">×</button>
     </div>
-
+  @if (isLoading()) {
+    <div class="loader-overlay">
+      <div class="spinner"></div>
+      <p>טוען משימות...</p>
+    </div>
+  } @else {
+    <div class="board-layout">...</div>
+  }
     <div class="comments-list">
       @for (comment of comments(); track comment.id) {
       <div class="comment-item">

@@ -11,7 +11,18 @@
       {{ showUsersList() ? 'סגור רשימת משתמשים' : 'הצג את כל המשתמשים במערכת' }}
     </button>
   </div>
+<div class="board-container">
+  
+  @if (isLoading()) {
+    <div class="loader-overlay">
+      <div class="spinner"></div>
+      <p>טוען משימות...</p>
+    </div>
+  } @else {
+    <div class="board-layout">...</div>
+  }
 
+</div>
   @if (showUsersList()) {
   <div class="users-directory" appReveal>
     <h3>👥 ספר משתמשים</h3>

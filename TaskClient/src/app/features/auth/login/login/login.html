@@ -31,4 +31,12 @@
       <a routerLink="/register">צרי חשבון חדש</a>
     </div>
   </form>
+    @if (isLoading()) {
+    <div class="loader-overlay">
+      <div class="spinner"></div>
+      <p>טוען משימות...</p>
+    </div>
+  } @else {
+    <div class="board-layout">...</div>
+  }
 </div>

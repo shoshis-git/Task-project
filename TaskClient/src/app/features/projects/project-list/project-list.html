@@ -4,7 +4,14 @@
     <h1 class="modern-title">פרויקטים בצוות <span>#{{ teamId() }}</span></h1>
     <button class="add-project-btn" (click)="isModalOpen = true">+ פרויקט חדש</button>
   </div>
-
+  @if (isLoading()) {
+    <div class="loader-overlay">
+      <div class="spinner"></div>
+      <p>טוען משימות...</p>
+    </div>
+  } @else {
+    <div class="board-layout">...</div>
+  }
   <div class="projects-list">
     @for (project of filteredProjects(); track project.id) {
       <div class="project-item" >

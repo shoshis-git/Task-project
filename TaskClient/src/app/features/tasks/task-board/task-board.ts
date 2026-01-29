@@ -24,7 +24,7 @@ export class TaskBoard {
   projectId = signal<number>(0);
   tasks = signal<Tasks[]>([]);
 
-
+isLoading = signal(false);
 
 
   newTaskTitle = '';
@@ -43,23 +43,45 @@ export class TaskBoard {
   }
 
   loadProjectDetails(projectId: number) {
-    this.projectService.getProjects().subscribe(projects => {
+    this.isLoading.set(true);
+    this.projectService.getProjects().subscribe( {
+      next:(projects) => {
       const currentProject = projects.find(p => p.id === projectId);
       if (currentProject) {
 
         this.loadMembers(currentProject.team_id);
+        this.isLoading.set(false);
+      }
+    }
+    ,
+      error: () => {
+        this.isLoading.set(false);
       }
     });
   }
 
   loadMembers(teamId: number) {
-    this.teamService.getTeamMembers(teamId).subscribe(members => {
-      this.teamMembers.set(members);
+    this.isLoading.set(true);
+    this.teamService.getTeamMembers(teamId).subscribe( {
+      next: (members) => {
+        this.teamMembers.set(members);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+      }
     });
   }
 
   loadTasks() {
-    this.taskService.getTasks(this.projectId()).subscribe(data => this.tasks.set(data));
+    this.isLoading.set(true); 
+    this.taskService.getTasks(this.projectId()).subscribe({
+      next: (data) => {
+        this.tasks.set(data);
+        this.isLoading.set(false);
+      },
+      error: () => { this.isLoading.set(false); }
+    });
   }
 newTask = {
   title: '',
@@ -112,37 +134,7 @@ resetNewTask() {
     due_date: null
   };
 }
-  // addTask() {
-  //   if (!this.newTaskTitle.trim()) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'פעולה נכשלה',
-  //       text: 'נא להזין כותרת למשימה',
-  //       confirmButtonColor: '#6366f1'
-  //     }); return
-  //   };
-  //   const taskData = {
-  //     projectId: Number(this.projectId()),
-  //     title: this.newTask.title || '', 
-  //      description: this.newTask.description || '',
-  //     status: this.newTask.status || 'todo',
-  //    priority:this.newTask.priority || 'medium',
-  //     assignee_id: this.newTask.assignee_id || null,
-  //     due_date: this.newTask.due_date || null
-     
-  //   };
-
-  //   this.taskService.createTask(taskData).subscribe(newTask => {
-  //     this.tasks.update(prev => [...prev, newTask]);
-  //     this.newTaskTitle = '';
-  //     Swal.fire({
-  //       icon: 'success',
-  //       title: 'משימה נוספה בהצלחה!',
-  //       confirmButtonColor: 'linear-gradient(135deg, #6366f1, #a855f7)',
-  //       timer: 2000
-  //     });
-  //   });
-  // }
+  
 
   changeStatus(task: Tasks, newStatus: string) {
     this.taskService.updateTask(task.id, { status: newStatus }).subscribe({
