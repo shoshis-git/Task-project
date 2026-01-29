@@ -16,7 +16,7 @@
     letter-spacing: -1px;
     background: linear-gradient(135deg, #1e1b4b, #4338ca);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: rgb(99 102 241 / 70%);
     margin: 20px 0 40px;
     flex: 1; /* דוחף את האלמנטים לצדדים כדי שיישאר במרכז */
 }

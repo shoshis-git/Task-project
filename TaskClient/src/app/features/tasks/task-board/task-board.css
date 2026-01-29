@@ -540,10 +540,10 @@ input:focus, textarea:focus {
   background: #e5e7eb;
   background-image: linear-gradient(
     to right,
-    #e5e7eb 0%,
-    #f3f4f6 20%,
-    #e5e7eb 40%,
-    #e5e7eb 100%
+    #5d7dbc 0%,
+    #5987e3 20%,
+    #2863d8 40%,
+    #de7fe7 100%
   );
   background-repeat: no-repeat;
   background-size: 800px 100%;

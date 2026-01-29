@@ -22,15 +22,15 @@
     animation: fadeInUp 0.8s ease-out;
 }
 
-h2 {
-    color: #1e1b4b;
+.login-card h2 {
+    color:  #9333ea;
     text-align: center;
     font-size: 2rem;
     font-weight: 850;
     margin-bottom: 35px;
-    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 /* --- קבוצות הטופס --- */
@@ -145,15 +145,15 @@ button:disabled {
 }
 
 .auth-header h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 900;
     margin-bottom: 10px;
-    cursor: pointer;
+    cursor:pointer;
     background: linear-gradient(135deg, #6366f1, #a855f7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -1px;
-    transition: transform 0.3s ease;
+    transition: transform 0.9s ease;
 }
 
 .auth-header h2:hover {

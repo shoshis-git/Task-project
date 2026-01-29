@@ -4,6 +4,7 @@
     <p>ברוכים השבים! היכנסו כדי להמשיך לזרום עם המשימות שלכם.</p>
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-card">
+    
     <h2>התחברות למערכת</h2>
 
     <div class="form-group">
@@ -31,10 +32,12 @@
       <a routerLink="/register">צרי חשבון חדש</a>
     </div>
   </form>
+
+</div>
+
     @if (isLoading()) {
     <div class="loader-overlay">
       <div class="spinner"></div>
       <p>טוען...</p>
     </div>
   }
-</div>
