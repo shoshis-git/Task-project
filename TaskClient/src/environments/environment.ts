@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://task-client-z6ui.onrender.com/api',
+  apiUrl: 'https://task-project-azk0.onrender.com/api',
 };
