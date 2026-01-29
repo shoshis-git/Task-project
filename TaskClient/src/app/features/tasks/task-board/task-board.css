@@ -505,27 +505,54 @@ input:focus, textarea:focus {
 
 
 
-/* loader.css */
-.loader-overlay {
+/* skeleton.css */
+.skeleton-board {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: 20px;
+  padding: 20px;
   min-height: 400px;
+}
+
+.skeleton-column {
+  flex: 1;
+  background: #f3f4f6;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.skeleton-header {
+  height: 30px;
+  width: 60%;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.skeleton-task {
+  height: 100px;
   width: 100%;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #6366f1; /* הצבע הסגול-כחול שלנו */
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+  background: #ffffff;
   margin-bottom: 15px;
+  border-radius: 8px;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* האנימציה המרכזית */
+.shimmer {
+  background: #e5e7eb;
+  background-image: linear-gradient(
+    to right,
+    #e5e7eb 0%,
+    #f3f4f6 20%,
+    #e5e7eb 40%,
+    #e5e7eb 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 100%;
+  display: inline-block;
+  position: relative;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
 }

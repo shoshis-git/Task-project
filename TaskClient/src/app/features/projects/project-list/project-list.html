@@ -7,11 +7,9 @@
   @if (isLoading()) {
     <div class="loader-overlay">
       <div class="spinner"></div>
-      <p>טוען משימות...</p>
+      <p>טוען פרויקטים...</p>
     </div>
-  } @else {
-    <div class="board-layout">...</div>
-  }
+  } 
   <div class="projects-list">
     @for (project of filteredProjects(); track project.id) {
       <div class="project-item" >

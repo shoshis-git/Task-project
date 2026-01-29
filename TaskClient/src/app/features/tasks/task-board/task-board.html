@@ -82,14 +82,18 @@
       }
     </div>
   </header>
-  @if (isLoading()) {
-    <div class="loader-overlay">
-      <div class="spinner"></div>
-      <p>טוען משימות...</p>
-    </div>
-  } @else {
-    <div class="board-layout">...</div>
-  }
+@if (isLoading()) {
+  <div class="skeleton-board">
+    @for (col of [1,2,3]; track col) {
+      <div class="skeleton-column">
+        <div class="skeleton-header shimmer"></div>
+        <div class="skeleton-task shimmer"></div>
+        <div class="skeleton-task shimmer"></div>
+        <div class="skeleton-task shimmer"></div>
+      </div>
+    }
+  </div>
+}
   <div class="board-layout">
     <div class="column todo">
       <div class="column-header">

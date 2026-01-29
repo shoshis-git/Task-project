@@ -50,7 +50,7 @@ isLoading = signal(false);
       if (currentProject) {
 
         this.loadMembers(currentProject.team_id);
-        this.isLoading.set(false);
+        setTimeout(()=>this.isLoading.set(false),300);
       }
     }
     ,
@@ -65,7 +65,7 @@ isLoading = signal(false);
     this.teamService.getTeamMembers(teamId).subscribe( {
       next: (members) => {
         this.teamMembers.set(members);
-        this.isLoading.set(false);
+       setTimeout(()=>this.isLoading.set(false),300);
       },
       error: () => {
         this.isLoading.set(false);
@@ -78,7 +78,7 @@ isLoading = signal(false);
     this.taskService.getTasks(this.projectId()).subscribe({
       next: (data) => {
         this.tasks.set(data);
-        this.isLoading.set(false);
+        setTimeout(()=>this.isLoading.set(false),300);
       },
       error: () => { this.isLoading.set(false); }
     });
