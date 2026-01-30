@@ -25,7 +25,13 @@
     <p class="server-error">{{ errorMessage }}</p>
     }
 
-    <button type="submit" [disabled]="loginForm.invalid">התחבר</button>
+    <button type="submit" [disabled]="loginForm.invalid">התחבר 
+    @if (isLoading()) {
+    <div class="loader-overlay">
+      <div class="spinner"></div>
+      <p>טוען...</p>
+    </div>
+  }</button>
 
     <div class="footer-links">
       <span>עוד לא רשומה? </span>
@@ -34,10 +40,3 @@
   </form>
 
 </div>
-
-    @if (isLoading()) {
-    <div class="loader-overlay">
-      <div class="spinner"></div>
-      <p>טוען...</p>
-    </div>
-  }
