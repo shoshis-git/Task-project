@@ -34,10 +34,10 @@
     }
   </div>
   <button type="submit" [disabled]="registerForm.invalid">הרשמה @if (isLoading()) {
-    <div class="loader-overlay">
+   
       <div class="spinner"></div>
       <p>טוען ...</p>
-    </div>
+    
     }
   </button>
   <p>כבר יש לך חשבון? <a routerLink="/login">התחבר כאן</a></p>
