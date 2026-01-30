@@ -27,10 +27,10 @@
 
     <button type="submit" [disabled]="loginForm.invalid">התחבר 
     @if (isLoading()) {
-    <div class="loader-overlay">
+    
       <div class="spinner"></div>
-      <p>טוען...</p>
-    </div>
+      <p class="loader-overlay">טוען...</p>
+   
   }</button>
 
     <div class="footer-links">
