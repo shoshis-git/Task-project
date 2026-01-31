@@ -7,20 +7,18 @@
     </div>
   </header>
   <div class="header-actions">
-    <button class="btn-info" (click)="showUsersList.set(!showUsersList())">
-      {{ showUsersList() ? 'סגור רשימת משתמשים' : 'הצג את כל המשתמשים במערכת' }}
-    </button>
+
   </div>
-<div class="board-container">
-  
-  @if (isLoading()) {
+  <div class="board-container">
+
+    @if (isLoading()) {
     <div class="loader-overlay">
       <div class="spinner"></div>
       <p>טוען צוות...</p>
     </div>
-  }
+    }
 
-</div>
+  </div>
   @if (showUsersList()) {
   <div class="users-directory" appReveal>
     <h3>👥 ספר משתמשים</h3>
@@ -54,6 +52,9 @@
         <div class="team-management">
           <button class="btn-secondary-modern" (click)="onGetTeamMembers(team.id)">
             ניהול חברים
+          </button>
+          <button class="btn-info" (click)="showUsersList.set(!showUsersList())">
+            {{ showUsersList() ? 'סגור רשימת משתמשים' : 'הצג את כל המשתמשים במערכת' }}
           </button>
 
           <div class="quick-add-member">
